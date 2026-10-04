@@ -80,12 +80,12 @@
 
       <div class="p-5 overflow-y-auto space-y-5">
         
-        <!-- حاوية الكاروسيل بالسويب -->
-        <div id="carousel-box" class="relative w-full aspect-square rounded-xl overflow-hidden bg-black/60 border border-white/10 shadow-lg cursor-grab active:cursor-grabbing select-none">
+        <!-- حاوية الكاروسيل بالسويب: تم تعديل الخلفية إلى بيضاء لتندمج الصور بسلاسة -->
+        <div id="carousel-box" class="relative w-full aspect-square rounded-xl overflow-hidden bg-white shadow-lg cursor-grab active:cursor-grabbing select-none">
           <img id="carousel-img" src="" alt="صورة المنتج" class="w-full h-full object-contain pointer-events-none transition-transform duration-200">
           
           <!-- مؤشرات الصور (Dots) -->
-          <div id="carousel-dots" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/50 px-2.5 py-1 rounded-full pointer-events-auto"></div>
+          <div id="carousel-dots" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/30 px-2.5 py-1 rounded-full pointer-events-auto"></div>
         </div>
 
         <div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
@@ -159,7 +159,6 @@
 
     let currentCategory = "all";
 
-    // مصفوفة المنتجات بعد إضافة الماكينة الثانية
     const products = [
       {
         id: 1,
@@ -200,15 +199,11 @@
           "https://i.postimg.cc/63DpttZM/ABUIABACGAAg6K-Cv-AYood-X5cz-Cg-Bjig-Bg-(2).jpg",
           "https://i.postimg.cc/k4kgqqSk/ABUIABACGAAg6K-Cv-AYot-XD9QIwo-AY4o-AY-(1).jpg",
           "https://i.postimg.cc/pdcdcDXw/ABUIABACGAAgn7DCv-AYo2OOT0QQw6Ac4rws-(1).jpg",
-
-"https://i.postimg.cc/hGtj0Cgb/ABUIABACGAAgn7DCv-AYow-Ob-Mw-AMw6Ac4sgs-(1).jpg",
+          "https://i.postimg.cc/hGtj0Cgb/ABUIABACGAAgn7DCv-AYow-Ob-Mw-AMw6Ac4sgs-(1).jpg",
           "https://i.postimg.cc/wTN95CNh/ABUIABACGAAgn7DCv-AYoxsft4Acw6Ac4r-Qs-(1).jpg", 
-
-"https://i.postimg.cc/j5GSttf3/ABUIABACGAAgn7DCv-AYolf-Tw9QYw6Ac4sgs-(1).jpg", 
-
-"https://i.postimg.cc/1z3tKWPr/ABUIABACGAAgo-LDCv-AYoho-KR-wcw3gc4t-A0-(1).jpg", 
-
-"https://i.postimg.cc/HLkxtSHB/ABUIABACGAAgo-LDCv-AYouc-Daug-Ew3gc4ows-(1).jpg" 
+          "https://i.postimg.cc/j5GSttf3/ABUIABACGAAgn7DCv-AYolf-Tw9QYw6Ac4sgs-(1).jpg", 
+          "https://i.postimg.cc/1z3tKWPr/ABUIABACGAAgo-LDCv-AYoho-KR-wcw3gc4t-A0-(1).jpg", 
+          "https://i.postimg.cc/HLkxtSHB/ABUIABACGAAgo-LDCv-AYouc-Daug-Ew3gc4ows-(1).jpg" 
         ],
         desc: "ماكينة إسبريسو محمولة بتصميم الصاروخ الأنيق وحامل مدمج، نظام 3 في 1 متعدد الكبسولات والبن المطحون، مع تسخين فوري للماء البارد واستخلاص بضغط 19 بار وكريمة غنية.",
         specs: {
@@ -273,7 +268,8 @@
       container.innerHTML = filtered.map(p => `
         <div class="glass-card rounded-xl overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition duration-300">
           <div onclick="openProductModal(${p.id})" class="cursor-pointer">
-            <div class="h-44 sm:h-52 w-full overflow-hidden bg-black/60 flex items-center justify-center p-2">
+            <!-- تم تغيير الخلفية هنا لتكون بيضاء لتندمج مع خلفية صور المنتجات -->
+            <div class="h-44 sm:h-52 w-full overflow-hidden bg-white flex items-center justify-center p-2">
               <img src="${p.image}" alt="${p.name}" class="h-full w-full object-contain hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80'">
             </div>
             <div class="p-2.5 sm:p-3">
