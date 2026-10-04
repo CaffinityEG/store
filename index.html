@@ -33,7 +33,7 @@
   <header class="sticky top-0 z-30 bg-[#161618]/90 backdrop-blur-md border-b border-white/10">
     <div class="max-w-5xl mx-auto px-4 py-3 flex flex-row-reverse items-center justify-between">
       
-      <!-- اللوجو أقصى الشمال - رابط مباشر يعمل ريفرش نظيف للصفحة الرئيسية -->
+      <!-- اللوجو أقصى الشمال -->
       <a href="./" class="flex items-center gap-2 focus:outline-none group cursor-pointer">
         <span class="text-xl font-extrabold tracking-wider text-amber-500 uppercase group-hover:text-amber-400 transition">Caffinity</span>
         <span class="text-xl group-hover:scale-110 transition">☕</span>
@@ -50,8 +50,8 @@
 
   <!-- Hero Section -->
   <section class="py-6 px-4 text-center border-b border-white/5 bg-gradient-to-b from-amber-950/20 to-transparent">
-    <div class="max-w-xl mx-auto space-y-1.5">
-      <span class="text-[10px] uppercase tracking-widest text-amber-500 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Specialty Coffee & Espresso</span>
+    <div class="max-w-xl mx-auto space-y-5">
+      <span class="text-[12px] uppercase tracking-widest text-amber-500 font-bold bg-amber-500/10 px-2 py-2 rounded-full border border-amber-500/20">Specialty Coffee & Espresso</span>
       <h1 class="text-2xl sm:text-3xl font-extrabold text-white">قهوتك المظبوطة في أي مكان</h1>
       <p class="text-xs text-stone-400">معدات إسبريسو، تركي، ومستلزمات تحضير احترافية.</p>
     </div>
@@ -69,7 +69,7 @@
     <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
   </main>
 
-  <!-- نافذة تفاصيل المنتج والفيديو (Modal) -->
+  <!-- نافذة تفاصيل المنتج والكاروسيل (Product Modal with Carousel) -->
   <div id="product-modal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-3 sm:p-4 backdrop-blur-md">
     <div class="glass-card bg-[#18181b] w-full max-w-lg rounded-2xl overflow-hidden flex flex-col max-h-[90vh] shadow-2xl border border-white/10">
       
@@ -79,8 +79,21 @@
       </div>
 
       <div class="p-5 overflow-y-auto space-y-5">
-        <div class="rounded-xl overflow-hidden bg-black aspect-video w-full border border-white/10 shadow-lg">
-          <iframe id="modal-product-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+        
+        <!-- الكاروسيل الخاص بالصور -->
+        <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-black/60 border border-white/10 shadow-lg group">
+          <img id="carousel-img" src="" alt="صورة المنتج" class="w-full h-full object-contain transition-all duration-300">
+          
+          <!-- أزرار التنقل بين الصور -->
+          <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-amber-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition">
+            &#10094;
+          </button>
+          <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-amber-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition">
+            &#10095;
+          </button>
+
+          <!-- مؤشرات الصور (Dots) -->
+          <div id="carousel-dots" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-full"></div>
         </div>
 
         <div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
@@ -92,6 +105,7 @@
 
         <p id="modal-product-desc" class="text-stone-300 text-xs leading-relaxed"></p>
 
+        <!-- المواصفات الفنية تحت الكاروسيل -->
         <div>
           <h4 class="font-bold text-white text-xs mb-2.5 text-stone-200">المواصفات الفنية:</h4>
           <div id="modal-product-specs" class="bg-black/30 rounded-xl border border-white/5 divide-y divide-white/5 text-xs"></div>
@@ -101,7 +115,7 @@
     </div>
   </div>
 
-  <!-- نافذة السلة والطلب (Cart Modal مع التحكم بالكمية والحذف) -->
+  <!-- نافذة السلة والطلب -->
   <div id="cart-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-[#18181b] w-full max-w-md rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
       
@@ -139,7 +153,7 @@
   </footer>
 
   <script>
-    const WHATSAPP_NUMBER = "201000000000";
+    const WHATSAPP_NUMBER = "201155378837";
 
     const categories = [
       { id: "all", name: "الكل", img: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=120&q=80" },
@@ -153,70 +167,41 @@
 
     let currentCategory = "all";
 
+    // 1. المنتج الأول: ME2604 بكافة صوره ومواصفاته
     const products = [
       {
         id: 1,
         category: "portable",
-        name: "ماكينة إسبريسو محمولة (Portable)",
-        price: 1850,
-        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80",
-        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        desc: "ضغط 18 بار، تدعم البن المطحون والكبسولات لتحضير الإسبريسو أينما كنت.",
-        specs: { "أقصى ضغط": "18 بار", "سعة الماء": "80 مل", "الوزن": "360 جم" }
-      },
-      {
-        id: 2,
-        category: "home",
-        name: "ماكينة إسبريسو منزلية بمبخر حليب",
-        price: 4600,
-        image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=600&q=80",
-        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        desc: "مضخة 15 بار إيطالية لصنع الإسبريسو واللاتيه والكابتشينو برغوة كريمية غنية.",
-        specs: { "المضخة": "15 بار", "الخزان": "1.2 لتر", "القدرة": "1350 واط" }
-      },
-      {
-        id: 3,
-        category: "turkish",
-        name: "ماكينة قهوة تركي أوتوماتيك بحساس لمنع الفوران",
-        price: 1450,
-        image: "https://images.unsplash.com/photo-1578374173705-969cbe6f2d6b?w=600&q=80",
-        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        desc: "تحضير فنجان قهوة تركي بوش متماسك وسرعة فائقة مع نظام ذكي لمنع انسكاب القهوة.",
-        specs: { "السعة": "حتى 4 فناجين", "القدرة": "400 واط", "نظام الأمان": "إيقاف تلقائي وحساس فيضان" }
-      },
-      {
-        id: 4,
-        category: "grinders",
-        name: "طاحونة بن يدوية من الفولاذ المقاوم للصدأ",
-        price: 750,
-        image: "https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?w=600&q=80",
-        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        desc: "تروس سيراميك مخروطية مقاومة للتآكل تضمن طحناً دقيقاً ومتناسقاً لمختلف درجات الطحن.",
-        specs: { "التروس": "سيراميك مخروطي", "سعة الوعاء": "30 جرام بن" }
-      },
-      {
-        id: 5,
-        category: "frothers",
-        name: "خفاقة وفوامة حليب كهربائية قابلة لإعادة الشحن",
-        price: 390,
-        image: "https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&q=80",
-        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        desc: "موتور قوي بـ 3 سرعات قابلة للتعديل لعمل فوم حليب حريري وسميك في ثوانٍ معدودة.",
-        specs: { "الشحن": "USB Type-C", "السرعات": "3 مستويات سرعة", "المادة": "ستانلس ستيل غذائي" }
-      },
-      {
-        id: 6,
-        category: "accessories",
-        name: "مكبس قهوة احترافي (Tamper) 51mm",
-        price: 350,
-        image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&q=80",
-        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        desc: "قاعدة مسطحة من الإستانلس ستيل ومقبض خشبي فاخر لضغط متساوي ومتوازن لقرص القهوة.",
-        specs: { "المقاس": "51 ملم", "الخامة": "ستانلس ستيل 304 وخشب طبيعي" }
+        name: "ماكينة icafilas Portable ME2604",
+        price: 4000,
+        image: "https://i.postimg.cc/1tPxMDRw/Whats-App-Image-2026-09-15-at-10-06-46-PM.jpg",
+        images: [
+          "https://i.postimg.cc/nrvrFxtK/2.jpg",
+          "https://i.postimg.cc/Hs6zd1sL/Battery.jpg",
+          "https://i.postimg.cc/zv0CzTNp/Easy-to-clean.jpg",
+          "https://i.postimg.cc/sxwZ1f8S/Whats-App-Image-2026-09-15-at-10-06-46-PM-(5).jpg",
+          "https://i.postimg.cc/kGftDMZX/Whats-App-Image-2026-09-15-at-10-06-46-PM-(4).jpg",
+          "https://i.postimg.cc/bJfnBBkj/Whats-App-Image-2026-09-15-at-10-06-46-PM-(2).jpg",
+          "https://i.postimg.cc/13Twptzp/Whats-App-Image-2026-09-15-at-10-06-46-PM-(1).jpg",
+          "https://i.postimg.cc/FzDJ1Fq0/Whats-App-Image-2026-09-15-at-10-06-46-PM-(6).jpg",
+          "https://i.postimg.cc/tJXxXnr9/Whats-App-Image-2026-09-15-at-10-06-46-PM-(3).jpg"
+        ],
+        desc: "ماكينة إسبريسو محمولة احترافية بتقنية التسخين التلقائي للماء وضغط 19 بار حقيقي، ببطارية عملاقة 7800mAh تدعم كبسولات نسبريسو والبن المطحون في أي مكان.",
+        specs: {
+          "ضغط المضخة": "19 بار استخلاص حقيقي",
+          "سعة البطارية": "7800 mAh ليثيوم مدمجة",
+          "نظام التسخين": "تسخين ذاتي ذكي للماء البارد",
+          "التوافق": "كبسولات Nespresso الأصلية + البن المطحون (2in1)",
+          "سعة خزان المياه": "80 - 100 مل",
+          "منفذ الشحن": "USB Type-C يدعم الشحن السريع",
+          "الخامات": "ستانلس ستيل 304 صحي + بلاستيك ABS مقوى"
+        }
       }
     ];
 
     let cart = [];
+    let currentSlideIndex = 0;
+    let currentModalImages = [];
 
     function renderCategories() {
       const container = document.getElementById("categories-container");
@@ -261,8 +246,8 @@
       container.innerHTML = filtered.map(p => `
         <div class="glass-card rounded-xl overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition duration-300">
           <div onclick="openProductModal(${p.id})" class="cursor-pointer">
-            <div class="h-32 sm:h-40 w-full overflow-hidden bg-black/40">
-              <img src="${p.image}" alt="${p.name}" class="h-full w-full object-cover hover:scale-105 transition duration-300">
+            <div class="h-44 sm:h-52 w-full overflow-hidden bg-black/60 flex items-center justify-center p-2">
+              <img src="${p.image}" alt="${p.name}" class="h-full w-full object-contain hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80'">
             </div>
             <div class="p-2.5 sm:p-3">
               <h3 class="font-bold text-xs sm:text-sm text-stone-100 line-clamp-1 leading-snug">${p.name}</h3>
@@ -283,10 +268,13 @@
       const prod = products.find(p => p.id === id);
       if (!prod) return;
 
+      currentModalImages = prod.images && prod.images.length > 0 ? prod.images : [prod.image];
+      currentSlideIndex = 0;
+      updateCarousel();
+
       document.getElementById("modal-product-title").textContent = prod.name;
       document.getElementById("modal-product-price").textContent = `${prod.price} ج.م`;
       document.getElementById("modal-product-desc").textContent = prod.desc;
-      document.getElementById("modal-product-video").src = prod.videoEmbed;
 
       const specsBox = document.getElementById("modal-product-specs");
       specsBox.innerHTML = Object.entries(prod.specs).map(([key, value]) => `
@@ -310,9 +298,35 @@
       }
     }
 
+    function updateCarousel() {
+      const imgElem = document.getElementById("carousel-img");
+      imgElem.src = currentModalImages[currentSlideIndex];
+
+      const dotsElem = document.getElementById("carousel-dots");
+      dotsElem.innerHTML = currentModalImages.map((_, idx) => `
+        <span onclick="setSlide(${idx})" class="w-2 h-2 rounded-full cursor-pointer transition ${
+          idx === currentSlideIndex ? 'bg-amber-500 w-4' : 'bg-white/40'
+        }"></span>
+      `).join('');
+    }
+
+    function nextSlide() {
+      currentSlideIndex = (currentSlideIndex + 1) % currentModalImages.length;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentSlideIndex = (currentSlideIndex - 1 + currentModalImages.length) % currentModalImages.length;
+      updateCarousel();
+    }
+
+    function setSlide(idx) {
+      currentSlideIndex = idx;
+      updateCarousel();
+    }
+
     function closeProductModal() {
       document.getElementById("product-modal").classList.add("hidden");
-      document.getElementById("modal-product-video").src = "";
       window.history.pushState({}, "", window.location.pathname);
     }
 
