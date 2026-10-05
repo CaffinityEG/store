@@ -80,7 +80,7 @@
 
       <div class="p-5 overflow-y-auto space-y-5">
         
-        <!-- حاوية الكاروسيل بالسويب: تم تعديل الخلفية إلى بيضاء لتندمج الصور بسلاسة -->
+        <!-- حاوية الكاروسيل بالسويب -->
         <div id="carousel-box" class="relative w-full aspect-[2/3] rounded-xl overflow-hidden bg-white shadow-lg cursor-grab active:cursor-grabbing select-none">
           <img id="carousel-img" src="" alt="صورة المنتج" class="w-full h-full object-contain pointer-events-none transition-transform duration-200">
           
@@ -222,6 +222,35 @@
           "الشحن": "USB Type-C خلال 120 دقيقة",
           "القدرة الكهربائية": "100W"
         }
+      },
+      {
+        id: 3,
+        category: "home",
+        name: "ماكينة Capadeli MAX 01 Coffee Machine",
+        price: 8500, // يمكنك تعديل السعر كما تشاء
+        image: "https://i.postimg.cc/FR5sQfB4/ABUIABACGAAg-r-Kxw-Yogqnz1AQw6Ac46Ac.jpg", // الصورة المربعة للمنتج في الشبكة الرئيسية
+        images: [
+          "https://i.postimg.cc/FR5sQfB4/ABUIABACGAAg-r-Kxw-Yogqnz1AQw6Ac46Ac.jpg", // صورة الغلاف
+          "https://i.postimg.cc/Kj6Qh4fS/ABUIABACGAAg-r-Kxw-YouN-S1gcw6Ac46Ac.jpg", // الألوان
+          "https://i.postimg.cc/qvs22r6x/ABUIABACGAAgj8-Kxw-Yorb-Kvw-Mw6Ac4g0w.jpg", // لايف ستايل 1
+          "https://i.postimg.cc/q79GZcvB/ABUIABACGAAgj8-Kxw-Youd-H87gMw6Ac4igw.jpg", // المواصفات التقنية
+          "https://i.postimg.cc/Pxy0RjJb/ABUIABACGAAg8r-Kxw-Yok-M3x3g-Yw6Ac46Ac.jpg", // تفاصيل الماكينة
+          "https://i.postimg.cc/zB7fHwM3/ABUIABACGAAg8r-Kxw-Yo48j-Q7g-Ew6Ac46Ac.jpg", // الأكواب والكريمة
+          "https://i.postimg.cc/639c0SGW/ABUIABACGAAgj8-Kxw-Yoq9b2zQ-Ew6Ac41gw.jpg", // الكبسولات (4 في 1)
+          "https://i.postimg.cc/mZHXN65n/ABUIABACGAAg8r-Kxw-Yoic2d2Q-cw6Ac46Ac.jpg", // صورة إضافية
+          "https://i.postimg.cc/RhdJ58b1/ABUIABACGAAgj8-Kxw-Yoou-X8h-Acw6Ac42w0.jpg"  // خطوات التحضير
+        ],
+        desc: "ماكينة قهوة منزلية ومكتبية فائقة الأداء بتصميم عصري[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span)، تتميز بنظام 4 في 1 متوافق مع كافة الكبسولات والبن المطحون[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span)، مع تحكم حراري ذكي واستخلاص سريع في 20 ثانية بضغط 19 بار[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span).",
+        specs: {
+          "التوافق (4 in 1)": "كبسولات Nespresso + Dolce Gusto + K-CUP + البن المطحون (14g)[span_15](start_span)[span_16](start_span)[span_17](start_span)"[span_15](end_span)[span_16](end_span)[span_17](end_span),
+          "قوة الاستخلاص": "مضخة بقوة 19 بار لضمان كريمة غنية (19BAR Pump)[span_18](start_span)"[span_18](end_span),
+          "التحكم الحراري": "نظام NTC ذكي لضبط الحرارة من 70° إلى 95° مئوية[span_19](start_span)"[span_19](end_span),
+          "سعة خزان المياه": "800 مل (سعة كبيرة قابلة للإزالة)[span_20](start_span)"[span_20](end_span),
+          "سرعة التحضير": "استخلاص سريع للقهوة في 20 ثانية (Fastfresh Brewed in 20S)[span_21](start_span)[span_22](start_span)"[span_21](end_span)[span_22](end_span),
+          "إعدادات الأكواب": "4 أحجام للأكواب مع قاعدة بارتفاعين (2-Stage Cup Rack)[span_23](start_span)"[span_23](end_span),
+          "نظام الأمان": "إيقاف تشغيل تلقائي (Auto Shut Down)[span_24](start_span)"[span_24](end_span),
+          "طريقة الاستخدام": "3 خطوات بسيطة: تركيب المحول، إدخاله، ثم اختيار حجم الكوب وبدء الاستخلاص[span_25](start_span)"[span_25](end_span)
+        }
       }
     ];
 
@@ -272,7 +301,6 @@
       container.innerHTML = filtered.map(p => `
         <div class="glass-card rounded-xl overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition duration-300">
           <div onclick="openProductModal(${p.id})" class="cursor-pointer">
-            <!-- تم تغيير الخلفية هنا لتكون بيضاء لتندمج مع خلفية صور المنتجات -->
             <div class="h-44 sm:h-52 w-full overflow-hidden bg-white flex items-center justify-center p-2">
               <img src="${p.image}" alt="${p.name}" class="h-full w-full object-contain hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80'">
             </div>
@@ -365,7 +393,6 @@
     carouselBox.addEventListener("touchend", (e) => {
       const diffX = e.changedTouches[0].clientX - startX;
       if (Math.abs(diffX) > 40) {
-        // في التنسيق RTL السحب لليمين ينقل للصورة التالية ولليسار للصورة السابقة
         if (diffX > 0) {
           nextSlide();
         } else {
