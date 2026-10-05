@@ -11,7 +11,7 @@
 
   <meta property="og:title" content="كافينتي | معدات القهوة المختصة والإسبريسو والتركي">
   <meta property="og:description" content="قهوتك المظبوطة في أي مكان - اطلب معداتك الآن عبر واتساب بكل سهولة.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80">
+  <meta property="og:image" content="https://caffinityeg.github.io/store/caffinity-og-banner.jpg">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -80,7 +80,7 @@
 
       <div class="p-5 overflow-y-auto space-y-5">
         
-        <!-- حاوية الكاروسيل بالسويب -->
+        <!-- حاوية الكاروسيل بخلفية بيضاء لصور الفيت -->
         <div id="carousel-box" class="relative w-full aspect-[2/3] rounded-xl overflow-hidden bg-white shadow-lg cursor-grab active:cursor-grabbing select-none">
           <img id="carousel-img" src="" alt="صورة المنتج" class="w-full h-full object-contain pointer-events-none transition-transform duration-200">
           
@@ -97,7 +97,7 @@
 
         <p id="modal-product-desc" class="text-stone-300 text-xs leading-relaxed"></p>
 
-        <!-- المواصفات الفنية تحت الكاروسيل -->
+        <!-- المواصفات الفنية -->
         <div>
           <h4 class="font-bold text-white text-xs mb-2.5 text-stone-200">المواصفات الفنية:</h4>
           <div id="modal-product-specs" class="bg-black/30 rounded-xl border border-white/5 divide-y divide-white/5 text-xs"></div>
@@ -159,6 +159,7 @@
 
     let currentCategory = "all";
 
+    // المصفوفة تحتوي على 5 منتجات
     const products = [
       {
         id: 1,
@@ -229,7 +230,7 @@
         id: 3,
         category: "home",
         name: "ماكينة Capadeli MAX 01 Coffee Machine",
-        price: 8500, 
+        price: 6000, 
         image: "https://i.postimg.cc/FR5sQfB4/ABUIABACGAAg-r-Kxw-Yogqnz1AQw6Ac46Ac.jpg",
         images: [
           "https://i.postimg.cc/FR5sQfB4/ABUIABACGAAg-r-Kxw-Yogqnz1AQw6Ac46Ac.jpg",
@@ -258,26 +259,55 @@
         id: 4,
         category: "grinders",
         name: "مطحنة ومقطرة iCafilas Electric Coffee Grinder",
-        price: 2600, // يمكنك تعديل السعر
-        image: "126672.jpg", // تذكر استبدالها برابط postimg
+        price: 3500,
+        image: "https://i.postimg.cc/sXv0Q8W9/126672.jpg",
         images: [
-          "126672.jpg",
-          "126669.jpg",
-          "126674.jpg",
-          "126671.jpg",
-          "126673.jpg",
-          "126670.jpg",
-          "126675.jpg",
-          "126676.jpg"
+          "https://i.postimg.cc/sXv0Q8W9/126672.jpg",
+          "https://i.postimg.cc/50tY4Qc9/126669.jpg",
+          "https://i.postimg.cc/wMs0H3N7/126674.jpg",
+          "https://i.postimg.cc/T3sLdM7D/126671.jpg",
+          "https://i.postimg.cc/NMWGZ7r7/126673.jpg",
+          "https://i.postimg.cc/FHBVw3Vj/126670.jpg",
+          "https://i.postimg.cc/J0vJ8H2F/126675.jpg",
+          "https://i.postimg.cc/C1dM245H/126676.jpg"
         ],
         desc: "جهاز احترافي 2 في 1 يجمع بين مطحنة إلكترونية وقمع تقطير مدمج لتحضير القهوة المقطرة الطازجة (All-in-One) في أي مكان بسهولة وسرعة.",
         specs: {
           "نظام العمل": "طحن كهربائي + فلتر تقطير مدمج (بدون فلاتر ورقية)",
-          "تروس الطحن": "مخروطية من الستانلس ستيل SUS420 عالي التحمل ومقاوم للصدأ",
+          "تروس الطحن": "مخروطية من الستانلس ستيل SUS420 عالي التحمل",
           "سعة البطارية": "3300 mAh ليثيوم (تكفي لطحن 38-39 مرة بالشحنة)",
           "منفذ وزمن الشحن": "USB Type-C ، شحن كامل خلال 180 دقيقة",
           "سعة الطحن والتقطير": "طحن 20 جرام بن / تقطير 200 مل ماء ساخن",
           "المواد المستخدمة": "بلاستيك غذائي آمن ومقاوم للحرارة العالية (Food Grade)"
+        }
+      },
+      {
+        id: 5,
+        category: "grinders",
+        name: "مطحنة iCafilas اليدوية الاحترافية (Manual Coffee Grinder)",
+        price: 4500, // سعر افتراضي يمكنك تعديله
+        image: "https://i.postimg.cc/5NvScSTb/ABUIABACGAAg157sm-AYorq-Sm3w-Mw7g-U47g-U.jpg", // استبدلها برابط بوست إيمدج لاحقاً
+        images: [
+          "https://i.postimg.cc/vBNcTCgg/ABUIABACGAAg18rmm-AYo0r-HKzw-Yw6Ac47Qw.jpg",
+          "https://i.postimg.cc/W33d2s40/ABUIABACGAAg18rmm-AYogp7A-Qcw6Ac47gw.jpg",
+          "https://i.postimg.cc/FRB7zwf2/ABUIABACGAAg18rmm-AYo8Kf-P6AMw6Ac47gw.jpg",
+          "https://i.postimg.cc/FRB7zwf2/ABUIABACGAAg18rmm-AYo8Kf-P6AMw6Ac47gw.jpg",          "https://i.postimg.cc/W33d2s40/ABUIABACGAAg18rmm-AYogp7A-Qcw6Ac47gw.jpg",       "https://i.postimg.cc/W33d2s40/ABUIABACGAAg18rmm-AYogp7A-Qcw6Ac47gw.jpg",         "https://i.postimg.cc/y843FqfW/ABUIABACGAAg18rmm-AYo8-D7AEw6Ac47gw.jpg",        "https://i.postimg.cc/vBNcTCgg/ABUIABACGAAg18rmm-AYo0r-HKzw-Yw6Ac47Qw.jpg",          "https://i.postimg.cc/FRB7zwf2/ABUIABACGAAg18rmm-AYo8Kf-P6AMw6Ac47gw.jpg",       "https://i.postimg.cc/W33d2s40/ABUIABACGAAg18rmm-AYogp7A-Qcw6Ac47gw.jpg", 
+"https://i.postimg.cc/y843FqfW/ABUIABACGAAg18rmm-AYo8-D7AEw6Ac47gw.jpg", 
+"https://i.postimg.cc/MGsy0PfS/ABUIABACGAAg857sm-AYo7o-GRxw-Mw6Ac46Ac.jpg", 
+"https://i.postimg.cc/66Ff1mHS/ABUIABACGAAg2crmm-AYov-LWjvg-Yw6Ac42Aw.jpg", 
+"https://i.postimg.cc/YSX1NnGN/ABUIABACGAAg857sm-AYo-M-5m-QUw6Ac46Ac.jpg", 
+"https://i.postimg.cc/xTH3r3hm/ABUIABACGAAg857sm-AYops-GOvg-Qw6Ac46Ac.jpg" 
+        ],
+        desc: "مطحنة قهوة يدوية احترافية بتصميم هندسي مريح[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span)، توفر طحناً دقيقاً ومتجانساً للحصول على أفضل استخلاص للقهوة سواء للإسبريسو أو التقطير[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span).",
+        specs: {
+          "الترس الداخلي": "ستانلس ستيل 420 (CNC) عالي الدقة لضمان طحن متجانس[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span)",
+          "الهيكل الخارجي": "سبيكة ألمنيوم متينة وعالية الجودة (Aluminum Alloy Shell)[span_20](start_span)[span_20](end_span)[span_21](start_span)[span_21](end_span)[span_22](start_span)[span_22](end_span)",
+          "المقبض": "مقبض موفر للجهد مع قبضة من الخشب الصلب (Solid wood grip)[span_23](start_span)[span_23](end_span)[span_24](start_span)[span_24](end_span)[span_25](start_span)[span_25](end_span)",
+          "نظام الدوران": "مزودة برمان بلي (Ball Bearings) لدوران سلس وسهل جداً أثناء الطحن[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span)",
+          "سعة حاوية البن": "تتسع لـ 30 جرام من حبوب القهوة[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span)[span_30](start_span)[span_30](end_span)",
+          "ضبط الطحن": "قرص خارجي سهل الضبط مع درجات تناسب الإسبريسو (10-14) والتقطير (18-24)[span_31](start_span)[span_31](end_span)[span_32](start_span)[span_32](end_span)[span_33](start_span)[span_33](end_span)",
+          "منع الانزلاق": "طوق سيليكون خارجي لتوفير قبضة محكمة ومريحة (Silicone anti-skid collar)[span_34](start_span)[span_34](end_span)[span_35](start_span)[span_35](end_span)[span_36](start_span)[span_36](end_span)",
+          "الوزن والأبعاد": "وزن 625 جرام - الطول 188 مم × القطر 55 مم[span_37](start_span)[span_37](end_span)"
         }
       }
     ];
